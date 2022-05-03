@@ -1,0 +1,26 @@
+on:
+  pull_request:
+  #   branches:
+  #   - master
+
+  push:
+      branches:
+        - master
+
+jobs:
+
+  build:
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Go
+      uses: actions/setup-go@v2
+      with:
+        go-version: 1.17
+
+    - name: format
+      run: bash ./.gha.gofmt.sh
+
+    - name: test
+      run: bash ./.gha.gotest.sh
